@@ -226,21 +226,16 @@ plt.show()
 
 #%%
 # Creating a boxplot
-fig,ax = plt.subplots()
-
-ax.boxplot(norm_reviews["RT_user_norm"])
+import seaborn as sns
+fig, ax = plt.subplots()
+sns.boxplot(y=norm_reviews['RT_user_norm'])
 ax.set_ylim(0,5)
-ax.set_xticklabels(["Rotten Tomatoes"])
-
-plt.show()
+plt.xlabel("Rotten Tomatos")
 
 #%%
+import pandas as pd
 num_cols = ['RT_user_norm', 'Metacritic_user_nom', 'IMDB_norm', 'Fandango_Ratingvalue']
-
-fig,ax = plt.subplots()
-
-ax.boxplot(norm_reviews[num_cols].values)
-ax.set_ylim(0,5)
-ax.set_xticklabels(num_cols, rotation = 90)
-
+norm = pd.melt(norm_reviews[num_cols])
+bp = sns.boxplot(x="variable",y="value", data=norm)
+bp.set_xticklabels(bp.get_xticklabels(),rotation=90)
 plt.show()
